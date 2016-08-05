@@ -1,3 +1,5 @@
+using namespace std;
+
 class Link
 {
 public:
