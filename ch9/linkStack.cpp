@@ -71,7 +71,7 @@ public:
 class LinkStack
 {
 private:
-	LinkedList* pList;				// without * will be a const
+	LinkedList* pList;				// LinkedList itself is actually a node
 
 public:
 	LinkStack()
