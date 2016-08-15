@@ -27,12 +27,13 @@ public:
 
 	~SortedList()
 	{
-	Link* pCurrent = pFirst;
-	while(pCurrent != NULL)
-	{
-		Link* pOldCur = pCurrent;
-		pCurrent = pCurrent->pNext;
-		delete pOldCur;
+		Link* pCurrent = pFirst;
+		while(pCurrent != NULL)
+		{
+			Link* pOldCur = pCurrent;
+			pCurrent = pCurrent->pNext;
+			delete pOldCur;
+		}
 	}
 
 	bool isEmpty()
@@ -41,7 +42,7 @@ public:
 	void insert(double key)
 	{
 		Link* pNewLink = new Link(key);
-		Link* previoud = NULL;
+		Link* pPrevious = NULL;
 		Link* pCurrent = pFirst;
 
 		while(pCurrent != NULL && key > pCurrent->dData)
