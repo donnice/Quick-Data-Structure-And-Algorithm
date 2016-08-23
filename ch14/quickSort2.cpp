@@ -69,4 +69,56 @@ public:
 		swap(center,right-1);			// put pivot
 		return theVect[right-1];
 	}
+
+	void swap(int dex1, int dex2)
+	{
+		double temp = theVect[dex1];
+		theVect[dex1] = theVect[dex2];
+		theVect[dex2] = temp;
+	}
+
+	int partitionIt(int left, int right, double pivot)
+	{
+		int leftMark = left;
+		int rightMark = right-1;
+
+		while(true)
+		{	
+			while(theVect[++leftMark] < pivot);		// find bigger
+			while(theVect[--rightMark] > pivot);	// find smaller
+			if(leftMark >= rightMark)
+				break;
+			else
+				swap(leftMark, rightMark);
+		}
+		swap(leftMark,right-1);
+		return leftMark;
+	}
+
+	void manualSort(int left, int right)
+	{
+		int size = right-left+1;
+		if(size <= 1)
+			return;
+		if(size == 2)
+		{
+			if(theVect[left] > theVect[right])
+				swap(left,right);
+			return;
+		}
+		else // size == 3
+		{
+			if(theVect[left] > theVect[right-1])
+				swap(left,right-1);	// left,center
+			if(theVect[left] > theVect[right])
+				swap(left,right);	// left,right
+			if(theVect[right-1] > theVect[right])
+				swap(right-1,right);
+		}
+	}
+};
+
+int main()
+{
+	return 0;
 }
