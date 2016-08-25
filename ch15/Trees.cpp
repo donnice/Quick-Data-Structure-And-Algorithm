@@ -14,7 +14,17 @@ public:						// constructor
 	
 	Node* find(int key)
 	{
-	
+		Node* pCurrent = pRoot;
+		while(pCurrent->iData !=key)
+		{
+			if(key < pCurrent->iData)
+				pCurrent = pCurrent->pLeftChild;
+			else
+				pCurrent = pCurrent->pRightChild;
+			if(pCurrent == NULL)
+				return NULL;
+		}
+		return pCurrent;
 	}
 
 	void insert(int id, double dd)
