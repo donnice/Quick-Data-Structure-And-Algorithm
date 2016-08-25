@@ -29,7 +29,38 @@ public:						// constructor
 
 	void insert(int id, double dd)
 	{
-
+		Node* pNewNode = new Node();
+		pNewNode->iData = id;
+		pNewNode->dData = dd;
+		if(pRoot == NULL)
+			pRoot = pNewNode;
+		else
+		{
+			Node* pCurrent = pRoot;
+			Node* pParent;
+			while(true)
+			{
+				pParent = pCurrent;
+				if(id < pCurrent -> iData)
+				{
+					pCurrent = pCurrent->pLeftChild;
+					if(pCurrent == NULL)
+					{
+						pParent->pLeftChild = pNewNode;
+						return;
+					}
+				}
+				else
+				{
+					pCurrent = pCurrent->pRightChild;
+					if(pCurrent == NULL)
+					{
+						pParent->pRightChild = pNewNode;
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	void traverse(int traverseType)
