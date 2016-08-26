@@ -1,5 +1,6 @@
 // page 330
 #include <iostream>
+#include <stack>
 #include "Node.cpp"
 
 using namespace std;
@@ -65,12 +66,81 @@ public:						// constructor
 
 	void traverse(int traverseType)
 	{
+		switch(traverseType)
+		{
+		case 1: 
+			cout << "\nPreorder traversal: ";
+			preOrder(pRoot);
+			break;
+		case 2:
+			cout << "\nInorder traversal: ";
+			break;
+		case 3:
+			cout << "\nPostorder traversal: ";
+			postOrder(pRoot);
+			break;
+		}
+		cout << endl;
+	}
 
+	void preOrder(Node* pLocalRoot)
+	{
+		if(pLocalRoot !=NULL)
+		{
+			cout << pLocalRoot ->iData << " ";	// displayNode
+			preOrder(pLocalRoot->pLeftChild);	// left
+			preOrder(pLocalRoot->pRightChild);	// right
+		}
+	}
+
+	void inOrder(Node* pLocalRoot)
+	{
+		if(pLocalRoot != NULL)
+		{
+			inOrder(pLocalRoot->pLeftChild);	// left child
+			cout << pLocalRoot->iData << " ";	// displayNode
+			inOrder(pLocalRoot->pRightChild);	// right child
+		}
+	}
+
+	void postOrder(Node* pLocalRoot)
+	{
+		if(pLocalRoot != NULL)
+		{
+			postOrder(pLocalRoot->pLeftChild);	// left child
+			postOrder(pLocalRoot->pRightChild);	// right child
+			cout << pLocalRoot->iData << " ";	// display node
+		}
 	}
 
 	void displayTree()
 	{
+		stack<Node*> globalStack;
+		globalStack.push(pRoot);
+		int nBlanks = 32;
+		bool isRowEmpty = false;
 
+		cout <<
+		"......................................";
+		cout << endl;
+		while(isRowEmpty == false)
+		{
+			stack<Node*> localStack;
+			isRowEmpty = true;
+		}
+	}
+
+	void destroy()
+	{ destroyRec(pRoot); }
+
+	void destroyRec(Node* pLocalRoot)
+	{
+		if(pLocalRoot != NULL)
+		{
+			destroyRec(pLocalRoot->pLeftChild);		// left subtree
+			destroyRec(pLocalRoot->pRightChild);	// right subtree
+			delete pLocalRoot;
+		}
 	}
 };
 
