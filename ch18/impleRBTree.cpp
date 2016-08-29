@@ -42,3 +42,27 @@ void insert_case2(struct node* n)
 		insert_case3(n);
 }
 
+// If both parent P and uncle U are red
+// then both should be black and grandparent G becomes red
+// the G may violate 2 and 4
+// 2. the root is black
+// 4. both children of every red are black
+// 4 is violated becuase G may have red parent
+// to fix, the entire procedure should be performed on G from case 1
+
+void insert_case3(struct node *n)
+{
+	struct node *u = uncle(n), *g;
+	if((u!=NULL) && (u->color == RED))
+	{
+		n->parent->color = BLACK;
+		u->color = BLACK;
+		g = grandparent(n);
+		g->color = RED;
+		insert_case1(g);
+	} else {
+		insert_case4(n);
+	}
+}
+
+
