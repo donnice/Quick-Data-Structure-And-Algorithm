@@ -65,4 +65,38 @@ void insert_case3(struct node *n)
 	}
 }
 
+// P is red but U is black
+// N is the right child of P and P in turn is left child of G
+// a left rotation on P switch the N and P can be performed
+// P need a case five to solve property 4
+// "all paths from any given to its leaf nodes contains the same #
+// of black nodes" is not violated
 
+void insert_case4(struct node *n)
+{
+	struct node *g = grandparent(n);
+
+	if((n == n->parent->right) && n->parent == g->left){
+		rotate_left(n->parent);
+
+		n = n->left;
+
+	} else if((n == n->parent->left)&&(n->parent == g->right)){
+		rotate_right(n->parent);
+		n = n->right;
+	}
+	insert_case5(n);
+}
+
+// a right rotation of G is performed
+void insert_case5(struct node *n)
+{
+	struct node *g = grandparent(n);
+
+	n->parent->color = BLACK;
+	g->color = RED;
+	if(n == n->parent->left)
+		rotate_right(g);
+	else
+		rotate_left(g);
+}
