@@ -220,6 +220,22 @@ void delete_case5(struct node *n)
 	delete_case6(n);
 }
 
+// S is black, S's right child is red and N is left child of P
+// rotate left at P
+// 
+void delete_case6(struct node *n)
+{
+	struct node *s = sibling(n);
 
+	s->color = n->parent->color;
+	n->parent->color = BLACK;
+
+	if(n == n->parent->left) {
+		s->right->color=BLACK;
+		rotate_left(n->parent);
+	} else {
+		s->left->color = BLACK;
+		rotate_right(n->parent);
 	}
 }
+
