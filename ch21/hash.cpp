@@ -48,4 +48,61 @@ public:
 	{
 		return key%arraySize;		// hash function
 	}
+	
+	// assume table is not full
+	void insert(DataItem* pItem)	// insert a data item
+	{
+		int key = pItem->iData;			// extract key
+		int hashVal = hashFunc(key);	// hash the key
+
+		while(hashArray[hashVal] != NULL
+		  &&  hashArray[hashVal]->iData != -1)
+		{
+			++hashVal;				// go to next cell
+			hashVal %= arraySize;	// wrapround is necessary
+		}
+		hashArray[hashVal] = pItem;	// insert 
+	}
+
+	DataItem* remove(int key)
+	{
+		int hashVal = hashFunc(key);	// hash the key
+
+		while(hashArray[hashVal]!=NULL)
+		{
+			int hashVal = hashFunc(key);	// hash the key
+
+			while(hashArray[hashVal]!=NULL)
+			{
+				if(hashArray[hashVal]->iData == key)
+				{
+					DataItem* pTemp = hashArray[hashVal];
+					hashArray[hashVal] = pNonItem;
+					return pTemp;
+				}
+				++hashVal;
+				hashVal%=arraySize;
+			}
+			return NULL;
+		}
+	}
+
+	DataItem* find(int key)
+	{
+		int hashVal = hashFunc(key);
+
+		while(hashArray[hashVal] != NULL)
+		{
+			if(hashArray[hashVal]->iData == key)
+				return hashArray[hashVal];
+			++hashVal;
+			hashVal%=arraySize;
+		}
+		return NULL;
+	}
 };
+
+int main()
+{
+	return 0;
+}
